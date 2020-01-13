@@ -1,0 +1,88 @@
+<div *ngIf="showSpinner" class="spinner_overlay">
+  <div class="spinner"></div>
+</div>
+
+<div
+  *ngIf="typeOfResult === 'allPlanets' && !isError && !isEmpty"
+  class="sizeBoxChange"
+>
+  <mat-form-field>
+    <mat-label>Size of Page</mat-label>
+    <mat-select (selectionChange)="changeResultsSize($event.value)">
+      <mat-option *ngFor="let size of sizes" [value]="size">
+        {{ size }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<app-planet-list
+  *ngIf="!isError; else elseBlock"
+  [planetList]="data"
+  [currentPage]="currentPage"
+  [pageSize]="currentPageSize"
+ 
+  (searchTerm)="searchTermChange($event)"
+>
+</app-planet-list>
+
+<div
+  *ngIf="!isError && !isEmpty"
+  class="arrowWrapper"
+  [ngSwitch]="typeOfResult"
+>
+  <div *ngSwitchCase="'allPlanets'">
+    <button
+      *ngIf="currentPage > 1"
+      (click)="paginationDown()"
+      class="prvPageBtn"
+      mat-button
+    >
+      <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+      </svg>
+    </button>
+    <button
+      *ngIf="currentPage < numberOfPlanetsPages"
+      (click)="paginationUp()"
+      class="nextPageBtn"
+      mat-button
+    >
+      <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+      </svg>
+    </button>
+  </div>
+  <div *ngSwitchCase="'search'">
+    <button
+      *ngIf="prvSearchUtl"
+      (click)="paginationDown()"
+      class="prvPageBtn"
+      mat-button
+    >
+      <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+      </svg>
+    </button>
+    <button
+      *ngIf="nextSearchUtl"
+      (click)="paginationUp()"
+      class="nextPageBtn"
+      mat-button
+    >
+      <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+<ng-template #elseBlock>
+  <section class="section error">
+    <div *ngIf="isEmpty">
+      <span>No Planet to show</span>
+    </div>
+    <div *ngIf="!isEmpty">
+      <p>something goes wrong try again</p>
+      <button mat-flat-button (click)="getPlanets()">Try Again</button>
+    </div>
+  </section>
+</ng-template>

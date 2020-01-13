@@ -1,0 +1,13 @@
+
+.sizeBoxChange {
+    padding: 0 10px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+::ng-deep .mat-form-field {
+   width: 100%;
+}
+.arrowWrapper {
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,20 @@
+th.mat-header-cell,
+tr.mat-row {
+  text-align: center;
+}
+
+table {
+  width: 100%;
+}
+
+.placeholder {
+  margin-left: 10px;
+  color: #000;
+}
+
+mat-form-field.mat-form-field {
+  width: 100%;
+}
+mat-paginator {
+  margin-bottom: 10px;
+}

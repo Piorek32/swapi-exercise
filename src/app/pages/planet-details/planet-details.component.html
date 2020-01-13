@@ -1,0 +1,52 @@
+<div *ngIf="showSpinner" class="spinner_overlay">
+  <div class="spinner"></div>
+</div>
+<button (click)="goBack()" class="btnBack" mat-flat-button>Back</button>
+<main>
+  <section *ngIf="planet && !isError; else elseBlock" class="section">
+    <h2>{{ (planet && planet.name) || "no Planet" }}</h2>
+    <div class="listWrraper">
+      <ul>
+        <li *ngIf="planet.rotation_period">
+          <span class="title">rotation_period</span>
+          <p>{{ planet.rotation_period }}</p>
+        </li>
+        <li>
+          <span>orbital period</span>
+          <p>{{ planet.orbital_period || "no data to show" }}</p>
+        </li>
+        <li>
+          <span>diameter</span>
+          <p>{{ planet.diameter || "no data to show" }}</p>
+        </li>
+        <li>
+          <span>climate</span>
+          <p>{{ planet.climate || "no data to show" }}</p>
+        </li>
+        <li>
+          <span>gravity</span>
+          <p>{{ planet.gravity || "no data to show" }}</p>
+        </li>
+        <li>
+          <span>surface water</span>
+          <p>{{ planet.surface_water || "no data to show" }}</p>
+        </li>
+        <li>
+          <span>terrain</span>
+          <p>{{ planet.terrain || "no data to show" }}</p>
+        </li>
+        <li>
+          <span>population</span>
+          <p>{{ planet.population || "no data to show" }}</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <ng-template #elseBlock>
+    <section class="section error">
+      <div *ngIf="isError">
+        <p>something goes wrong</p>
+      </div>
+    </section>
+  </ng-template>
+</main>
